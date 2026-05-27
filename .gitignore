@@ -135,7 +135,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-data\jobs.db
+data/jobs.db
 
 # Spyder project settings
 .spyderproject
