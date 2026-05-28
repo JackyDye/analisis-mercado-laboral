@@ -84,6 +84,10 @@ def scrape_jobs(max_pages=5):
         # find_all devuelve una lista con todas las ofertas que encuentre en la página
         offers = soup.find_all("article", class_="box_offer")
 
+        if len(offers) == 0:
+            print("No se encontraron más ofertas. Deteniendo scraper.")
+            break
+
         print(f"Página {page}: {len(offers)} ofertas encontradas")
 
         for offer in offers:
@@ -142,10 +146,14 @@ def parse_offer(article):
     details = article.find("div", class_="fs13 mt15")
     if details:
         spans = details.find_all("span", class_="dIB mr10")
-        if len(spans) >= 1:
-            salary = spans[0].text.strip()   # Primer span: salario
-        if len(spans) >= 2:
-            modality = spans[1].text.strip() # Segundo span: modalidad
+        for span in spans:
+            text = span.text.strip()
+            # Si el texto contiene $ o números, es salario
+            # Si no, es modalidad
+            if "$" in text or any(char.isdigit() for char in text):
+                salary = text
+            else:
+                modality = text
 
     # Fecha de publicación (ej: "Hace 2 horas", "Hace 3 días")
     date = article.find("p", class_="fs13 fc_aux mt15")
