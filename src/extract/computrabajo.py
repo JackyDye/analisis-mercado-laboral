@@ -36,6 +36,9 @@ import time                     # Para agregar pausas entre requests
 # Ejemplo página 2: https://www.computrabajo.com.ar/trabajo-de-data-analyst?p=2
 BASE_URL = "https://www.computrabajo.com.ar/trabajo-de-data-analyst"
 
+# Dominio base para contruir URLs absolutas y extraer la descripción completa de la oferta
+DOMAIN = "https://www.computrabajo.com.ar" 
+
 # Headers para simular un usuario real.
 # Sin esto, Computrabajo puede identificar el request como automático y bloquearlo.
 HEADERS = {
@@ -98,6 +101,34 @@ def scrape_jobs(max_pages=5):
 
     return jobs
 
+def fetch_description(url):
+    """
+    Visita la página individual de una oferta y extrae el texto completo
+    de la descripción.
+
+    Argumentos:
+        url (str): URL relativa de la oferta (ej: /ofertas-de-trabajo/...)
+
+    Returns:
+        str: texto completo de la descripción, o None si no se encuentra.
+    """
+    try:
+        full_url = f"https://www.computrabajo.com.ar{url}"
+        response = requests.get(full_url, headers=HEADERS)
+
+        if response.status_code != 200:
+            return None
+
+        soup = BeautifulSoup(response.text, "html.parser")
+        description_div = soup.find("div", class_="description_offer")
+
+        if description_div:
+            return description_div.get_text(separator=" ", strip=True)
+
+        return None
+
+    except Exception:
+        return None
 
 def parse_offer(article):
     """
@@ -105,11 +136,18 @@ def parse_offer(article):
 
     Cada oferta en Computrabajo tiene la siguiente estructura HTML:
         <article class="box_offer">
-            <h2 class="fs18 fwB prB">          → título del puesto
-            <p class="dFlex vm_fx fs16 ...">   → empresa
-            <p class="fs16 fc_base mt5">       → ubicación
-            <div class="fs13 mt15">            → salario y modalidad
+            <h2 class="fs18 fwB prB ...">
+            <a class="js-o-link fc_base"       → título del puesto y URL
+            <p class="dFlex vm_fx fs16 ...">
+            <a class="fc_base t_ellipsis">     → empresa
+            <p class="fs16 fc_base mt5"...>
+            <span class="mr10">                → ubicación
+            <div class="fs13 mt15"...>
+            <span class="dIB mr10">            → salario o modalidad (no siempre ambos)
             <p class="fs13 fc_aux mt15">       → fecha de publicación
+
+    Para la descripción se hace un segundo request a la página individual
+    de cada oferta, usando la URL extraída del <a> dentro del <h2>.
 
     Para cada campo se usa el patrón:
         elemento = article.find(tag, class_=clase)
@@ -118,16 +156,26 @@ def parse_offer(article):
     El "if elemento else None" evita errores cuando un campo no está presente
     en la oferta (no todas las ofertas tienen salario, por ejemplo).
 
-    Argumentos:
+    Args:
         article: elemento BeautifulSoup correspondiente a un <article class="box_offer">
 
     Returns:
         dict: diccionario con los campos extraídos de la oferta.
     """
     # Título del puesto
-    # Está dentro de un <a> dentro del <h2>
-    title = article.find("h2", class_="fs18 fwB prB")
-    title = title.find("a").text.strip() if title else None
+    # Está dentro de un <h2 class="fs18 fwB prB">, y la URL de la oferta individual está en el <a> dentro del <h2>
+    title_tag = article.find("h2", class_="fs18 fwB prB")
+    title = None
+    offer_url = None
+    # la url de la oferta individual está en el href del <a> dentro del <h2>
+    if title_tag:
+        a_tag = title_tag.find("a")
+        if a_tag:
+            title = a_tag.text.strip()
+            offer_url = a_tag.get("href")
+
+    # Descripción completa desde la página individual
+    description = fetch_description(offer_url) if offer_url else None
 
     # Nombre de la empresa
     # Está en un <a class="fc_base t_ellipsis"> dentro del párrafo de empresa
@@ -166,6 +214,7 @@ def parse_offer(article):
         "salary": salary,
         "modality": modality,
         "date": date,
+        "description": description,
         "source": "computrabajo",  # Identifica de qué fuente viene el dato
         "country": "ar"            # País fijo para esta fuente
     }
