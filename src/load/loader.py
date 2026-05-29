@@ -35,7 +35,7 @@ SCHEMA_PATH = ROOT_DIR / "db" / "schema.sql"
 
 def get_engine():
     """
-    Crea y devuelve el motor de conoexión a la base de datos SQLite.
+    Crea y devuelve el motor de conexión a la base de datos SQLite.
 
     El motor es el objeto principal de SQLAlchemy, gestiona la conexión 
     y permite ejecutar queries desde Python.
