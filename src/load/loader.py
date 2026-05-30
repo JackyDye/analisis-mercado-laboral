@@ -158,7 +158,7 @@ def insert_jobs(jobs, source):
                     "country": job.get("country"),
                     "modality": job.get("modality"),
                     "salary_raw": job.get("salary"),
-                    "description": None,  # No disponible en el listado de Computrabajo
+                    "description": job.get("description"),
                     "date_raw": job.get("date"),  # Formato relativo: "Hace 2 horas"
                     "source": "computrabajo"
                 })
