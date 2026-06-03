@@ -103,32 +103,16 @@ def scrape_jobs(max_pages=5):
 
 def fetch_description(url):
     """
-    Visita la página individual de una oferta y extrae el texto completo
-    de la descripción.
-
-    Argumentos:
-        url (str): URL relativa de la oferta (ej: /ofertas-de-trabajo/...)
+    Intento de extracción de descripción desde la página individual.
+    Deshabilitado: Computrabajo detecta requests automáticos y no devuelve
+    el contenido real de la oferta. Se requeriría automatización de navegador
+    (Playwright/Selenium) para obtener este dato, lo cual está fuera del
+    alcance de este proyecto.
 
     Returns:
-        str: texto completo de la descripción, o None si no se encuentra.
+        None
     """
-    try:
-        full_url = f"https://www.computrabajo.com.ar{url}"
-        response = requests.get(full_url, headers=HEADERS)
-
-        if response.status_code != 200:
-            return None
-
-        soup = BeautifulSoup(response.text, "html.parser")
-        description_div = soup.find("div", class_="description_offer")
-
-        if description_div:
-            return description_div.get_text(separator=" ", strip=True)
-
-        return None
-
-    except Exception:
-        return None
+    return None
 
 def parse_offer(article):
     """
