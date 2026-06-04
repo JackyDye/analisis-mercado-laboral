@@ -1,0 +1,91 @@
+country,skill,count,pct
+au,sql,9,23.1
+br,sql,10,11.6
+ca,sql,11,19.0
+gb,sql,12,23.5
+mx,sql,12,19.7
+us,sql,32,28.6
+au,power bi,9,23.1
+br,power bi,13,15.1
+ca,power bi,9,15.5
+gb,power bi,11,21.6
+mx,power bi,9,14.8
+us,power bi,17,15.2
+au,excel,2,5.1
+br,excel,2,2.3
+ca,excel,6,10.3
+gb,excel,14,27.5
+mx,excel,5,8.2
+us,excel,10,8.9
+br,python,9,10.5
+ca,python,6,10.3
+gb,python,1,2.0
+mx,python,6,9.8
+us,python,8,7.1
+au,r,1,2.6
+br,r,7,8.1
+ca,r,7,12.1
+gb,r,1,2.0
+mx,r,5,8.2
+us,r,4,3.6
+au,tableau,3,7.7
+br,tableau,2,2.3
+ca,tableau,2,3.4
+gb,tableau,1,2.0
+mx,tableau,3,4.9
+us,tableau,13,11.6
+br,git,21,24.4
+mx,git,1,1.6
+us,git,1,0.9
+au,etl,4,10.3
+br,etl,3,3.5
+ca,etl,4,6.9
+gb,etl,2,3.9
+mx,etl,2,3.3
+us,etl,5,4.5
+au,snowflake,1,2.6
+br,snowflake,4,4.7
+ca,snowflake,1,1.7
+mx,snowflake,7,11.5
+us,snowflake,6,5.4
+au,azure,6,15.4
+br,azure,3,3.5
+ca,azure,2,3.4
+gb,azure,2,3.9
+us,azure,3,2.7
+au,machine learning,3,7.7
+br,machine learning,2,2.3
+ca,machine learning,4,6.9
+mx,machine learning,2,3.3
+br,looker,3,3.5
+ca,looker,1,1.7
+gb,looker,1,2.0
+mx,looker,1,1.6
+us,looker,2,1.8
+br,spark,1,1.2
+ca,spark,2,3.4
+mx,spark,1,1.6
+us,spark,3,2.7
+br,aws,2,2.3
+gb,aws,1,2.0
+us,aws,3,2.7
+ca,data modeling,2,3.4
+mx,data modeling,2,3.3
+us,data modeling,1,0.9
+au,statistics,1,2.6
+gb,statistics,1,2.0
+mx,statistics,1,1.6
+us,statistics,1,0.9
+br,bigquery,1,1.2
+gb,bigquery,2,3.9
+mx,bigquery,1,1.6
+gb,jira,2,3.9
+mx,jira,1,1.6
+br,dbt,1,1.2
+us,dbt,2,1.8
+br,api,1,1.2
+ca,api,1,1.7
+br,redshift,1,1.2
+mx,redshift,1,1.6
+mx,google sheets,1,1.6
+us,google sheets,1,0.9
