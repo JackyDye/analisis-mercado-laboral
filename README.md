@@ -89,7 +89,7 @@ analisis-mercado-laboral/
 
 ---
 
-## Dasboard en Power BI
+## Dashboard en Power BI
 🚧 En construcción
 
 ---
