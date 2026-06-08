@@ -27,12 +27,16 @@ analisis-mercado-laboral/
 │       └── 6_jobs_clean.csv
 │
 ├── dashboard/
-│   └── assets/                  # Gráficos exportados del notebook
+│   ├── Dashboard.pbix           # Dashboard
+│   └── assets/                  # Gráficos exportados del notebook + screenshots del dashboard
 │       ├── 3_1_skills_demandadas.png
 │       ├── 3_2_seniority.png
 │       ├── 3_3_experiencia.png
 │       ├── 3_4_paises.png
-│       └── 3_5_salario_paises.png
+│       ├── 3_5_salario_paises.png
+│       ├── resumen.png
+│       ├── skills.png
+│       └── salarios.png
 │
 ├── db/
 │   └── schema.sql               # Schema de la base de datos
