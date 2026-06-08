@@ -77,7 +77,9 @@ analisis-mercado-laboral/
 - Exportación de datos agregados a `data/processed/` como fuente del dashboard
 
 ### 4. Dashboard en Power BI (`dashboard/`)
-🚧 En construcción
+![Dashboard página 1](dashboard/assets/resumen.png)
+![Dashboard página 2](dashboard/assets/skills.png)
+![Dashboard página 3](dashboard/assets/salarios.png)
 
 ---
 
