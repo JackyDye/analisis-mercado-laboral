@@ -211,6 +211,6 @@ y los resultados serán significativamente más representativos de la realidad d
 ## 👤 Autor
 
 **JackyDye**
-[GitHub](https://github.com/JackyDye)
+[GitHub](https://github.com/JackyDye) · [LinkedIn](https://www.linkedin.com/in/augusto-valles/)
 
 *Datos recolectados: mayo - junio 2026 | Fuentes: Adzuna API, Computrabajo*
